@@ -60,6 +60,13 @@ public sealed record EqualConditionTests
     }
 
     [Fact]
+    public void ThrowsExceptionOnEmptyArguments()
+    {
+        IBool equality = new EqualCondition();
+        Assert.Throws<ArgumentException>(() => equality.BoolValue);
+    }
+
+    [Fact]
     public void ThrowsExceptionOnGetHashCode()
     {
         Assert.Throws<NotSupportedException>(() => new EqualCondition(new Char('A')).GetHashCode());
