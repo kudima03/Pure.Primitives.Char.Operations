@@ -6,6 +6,8 @@ updates:
     - "src/Tests/Pure.Primitives.Char.Operations.Tests"
   schedule:
     interval: daily
+  reviewers:
+    - "kudima03"
 - package-ecosystem: "github-actions"
   directory: "/"
   schedule:
