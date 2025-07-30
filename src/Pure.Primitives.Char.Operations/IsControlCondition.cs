@@ -7,9 +7,7 @@ public sealed record IsControlCondition : IBool
 {
     private readonly IEnumerable<IChar> _values;
 
-    public IsControlCondition(params IChar[] values) : this(values.AsReadOnly()) { }
-
-    public IsControlCondition(IEnumerable<IChar> values)
+    public IsControlCondition(params IEnumerable<IChar> values)
     {
         _values = values;
     }

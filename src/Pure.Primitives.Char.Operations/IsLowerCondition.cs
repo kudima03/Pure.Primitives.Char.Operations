@@ -7,9 +7,7 @@ public sealed record IsLowerCondition : IBool
 {
     private readonly IEnumerable<IChar> _values;
 
-    public IsLowerCondition(params IChar[] values) : this(values.AsReadOnly()) { }
-
-    public IsLowerCondition(IEnumerable<IChar> values)
+    public IsLowerCondition(params IEnumerable<IChar> values)
     {
         _values = values;
     }

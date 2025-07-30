@@ -7,9 +7,7 @@ public sealed record IsUpperCondition : IBool
 {
     private readonly IEnumerable<IChar> _values;
 
-    public IsUpperCondition(params IChar[] values) : this(values.AsReadOnly()) { }
-
-    public IsUpperCondition(IEnumerable<IChar> values)
+    public IsUpperCondition(params IEnumerable<IChar> values)
     {
         _values = values;
     }

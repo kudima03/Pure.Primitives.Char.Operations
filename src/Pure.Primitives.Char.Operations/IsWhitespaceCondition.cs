@@ -7,9 +7,7 @@ public sealed record IsWhitespaceCondition : IBool
 {
     private readonly IEnumerable<IChar> _values;
 
-    public IsWhitespaceCondition(params IChar[] values) : this(values.AsReadOnly()) { }
-
-    public IsWhitespaceCondition(IEnumerable<IChar> values)
+    public IsWhitespaceCondition(params IEnumerable<IChar> values)
     {
         _values = values;
     }

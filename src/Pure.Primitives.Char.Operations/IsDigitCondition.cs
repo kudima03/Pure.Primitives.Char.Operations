@@ -7,9 +7,7 @@ public sealed record IsDigitCondition : IBool
 {
     private readonly IEnumerable<IChar> _values;
 
-    public IsDigitCondition(params IChar[] values) : this(values.AsReadOnly()) { }
-
-    public IsDigitCondition(IEnumerable<IChar> values)
+    public IsDigitCondition(params IEnumerable<IChar> values)
     {
         _values = values;
     }

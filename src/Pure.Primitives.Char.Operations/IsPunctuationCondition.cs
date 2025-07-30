@@ -7,9 +7,7 @@ public sealed record IsPunctuationCondition : IBool
 {
     private readonly IEnumerable<IChar> _values;
 
-    public IsPunctuationCondition(params IChar[] values) : this(values.AsReadOnly()) { }
-
-    public IsPunctuationCondition(IEnumerable<IChar> values)
+    public IsPunctuationCondition(params IEnumerable<IChar> values)
     {
         _values = values;
     }

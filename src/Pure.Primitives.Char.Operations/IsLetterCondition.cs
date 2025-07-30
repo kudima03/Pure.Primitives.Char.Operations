@@ -7,9 +7,7 @@ public sealed record IsLetterCondition : IBool
 {
     private readonly IEnumerable<IChar> _values;
 
-    public IsLetterCondition(params IChar[] values) : this(values.AsReadOnly()) { }
-
-    public IsLetterCondition(IEnumerable<IChar> values)
+    public IsLetterCondition(params IEnumerable<IChar> values)
     {
         _values = values;
     }
