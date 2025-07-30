@@ -7,9 +7,7 @@ public sealed record IsSymbolCondition : IBool
 {
     private readonly IEnumerable<IChar> _values;
 
-    public IsSymbolCondition(params IChar[] values) : this(values.AsReadOnly()) { }
-
-    public IsSymbolCondition(IEnumerable<IChar> values)
+    public IsSymbolCondition(params IEnumerable<IChar> values)
     {
         _values = values;
     }

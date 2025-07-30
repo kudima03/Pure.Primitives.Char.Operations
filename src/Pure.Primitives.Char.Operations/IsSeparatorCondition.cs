@@ -7,9 +7,7 @@ public sealed record IsSeparatorCondition : IBool
 {
     private readonly IEnumerable<IChar> _values;
 
-    public IsSeparatorCondition(params IChar[] values) : this(values.AsReadOnly()) { }
-
-    public IsSeparatorCondition(IEnumerable<IChar> values)
+    public IsSeparatorCondition(params IEnumerable<IChar> values)
     {
         _values = values;
     }

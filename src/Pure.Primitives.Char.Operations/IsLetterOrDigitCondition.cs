@@ -7,9 +7,7 @@ public sealed record IsLetterOrDigitCondition : IBool
 {
     private readonly IEnumerable<IChar> _values;
 
-    public IsLetterOrDigitCondition(params IChar[] values) : this(values.AsReadOnly()) { }
-
-    public IsLetterOrDigitCondition(IEnumerable<IChar> values)
+    public IsLetterOrDigitCondition(params IEnumerable<IChar> values)
     {
         _values = values;
     }
