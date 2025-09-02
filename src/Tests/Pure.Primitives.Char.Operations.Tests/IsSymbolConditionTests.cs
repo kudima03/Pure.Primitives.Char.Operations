@@ -1,23 +1,36 @@
-﻿using Pure.Primitives.Abstractions.Bool;
+using Pure.Primitives.Abstractions.Bool;
 
 namespace Pure.Primitives.Char.Operations.Tests;
 
 public sealed record IsSymbolConditionTests
 {
-    private readonly IEnumerable<char> _symbolChars = new[]
-    {
+    private readonly IEnumerable<char> _symbolChars =
+    [
         // Currency symbols
-        '$', '€', '£', '¥', '¢',
-
+        '$',
+        '€',
+        '£',
+        '¥',
+        '¢',
         // Mathematical symbols
-        '+', '=', '×', '÷', '<', '>', '±',
-
+        '+',
+        '=',
+        '×',
+        '÷',
+        '<',
+        '>',
+        '±',
         // Modifier and other symbols
-        '^', '~', '|',
-
+        '^',
+        '~',
+        '|',
         // Special symbols
-        '©', '®', '™', '✓', '✗'
-    };
+        '©',
+        '®',
+        '™',
+        '✓',
+        '✗',
+    ];
 
     [Fact]
     public void TakesPositiveResultOnSymbols()
@@ -30,7 +43,9 @@ public sealed record IsSymbolConditionTests
     [Fact]
     public void TakesFalseResultOnAllSymbolsOneNot()
     {
-        IBool equality = new IsSymbolCondition(_symbolChars.Select(x => new Char(x)).Append(new Char('A')));
+        IBool equality = new IsSymbolCondition(
+            _symbolChars.Select(x => new Char(x)).Append(new Char('A'))
+        );
 
         Assert.False(equality.BoolValue);
     }
@@ -46,7 +61,9 @@ public sealed record IsSymbolConditionTests
     [Fact]
     public void ProduceTrueOnSingleElementInCollection()
     {
-        IBool equality = new IsSymbolCondition(_symbolChars.Select(x => new Char(x)).First());
+        IBool equality = new IsSymbolCondition(
+            _symbolChars.Select(x => new Char(x)).First()
+        );
         Assert.True(equality.BoolValue);
     }
 
@@ -54,18 +71,22 @@ public sealed record IsSymbolConditionTests
     public void ThrowsExceptionOnEmptyArguments()
     {
         IBool equality = new IsSymbolCondition();
-        Assert.Throws<ArgumentException>(() => equality.BoolValue);
+        _ = Assert.Throws<ArgumentException>(() => equality.BoolValue);
     }
 
     [Fact]
     public void ThrowsExceptionOnGetHashCode()
     {
-        Assert.Throws<NotSupportedException>(() => new IsSymbolCondition(new Char('A')).GetHashCode());
+        _ = Assert.Throws<NotSupportedException>(() =>
+            new IsSymbolCondition(new Char('A')).GetHashCode()
+        );
     }
 
     [Fact]
     public void ThrowsExceptionOnToString()
     {
-        Assert.Throws<NotSupportedException>(() => new IsSymbolCondition(new Char('A')).ToString());
+        _ = Assert.Throws<NotSupportedException>(() =>
+            new IsSymbolCondition(new Char('A')).ToString()
+        );
     }
 }

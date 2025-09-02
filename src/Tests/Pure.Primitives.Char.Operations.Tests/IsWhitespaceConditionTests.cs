@@ -1,17 +1,17 @@
-﻿using Pure.Primitives.Abstractions.Bool;
+using Pure.Primitives.Abstractions.Bool;
 
 namespace Pure.Primitives.Char.Operations.Tests;
 
 public sealed record IsWhitespaceConditionTests
 {
-    private readonly IEnumerable<char> _whitespaceChars = new[]
-    {
-        ' ',    // Пробел (Space, U+0020)
-        '\t',   // Табуляция (Tab, U+0009)
-        '\n',   // Перевод строки (Line Feed, U+000A)
-        '\r',   // Возврат каретки (Carriage Return, U+000D)
-        '\v',   // Вертикальная табуляция (Vertical Tab, U+000B)
-        '\f',   // Перевод страницы (Form Feed, U+000C)
+    private readonly IEnumerable<char> _whitespaceChars =
+    [
+        ' ', // Пробел (Space, U+0020)
+        '\t', // Табуляция (Tab, U+0009)
+        '\n', // Перевод строки (Line Feed, U+000A)
+        '\r', // Возврат каретки (Carriage Return, U+000D)
+        '\v', // Вертикальная табуляция (Vertical Tab, U+000B)
+        '\f', // Перевод страницы (Form Feed, U+000C)
         '\u00A0', // Неразрывный пробел (Non-breaking space, U+00A0)
         '\u1680', // Ogham space mark (U+1680)
         '\u2000', // En quad (U+2000)
@@ -30,12 +30,14 @@ public sealed record IsWhitespaceConditionTests
         '\u202F', // Narrow no-break space (U+202F)
         '\u205F', // Medium mathematical space (U+205F)
         '\u3000', // Ideographic space (U+3000)
-    };
+    ];
 
     [Fact]
     public void TakesPositiveResultOnWhitespaces()
     {
-        IBool equality = new IsWhitespaceCondition(_whitespaceChars.Select(x => new Char(x)));
+        IBool equality = new IsWhitespaceCondition(
+            _whitespaceChars.Select(x => new Char(x))
+        );
 
         Assert.True(equality.BoolValue);
     }
@@ -43,7 +45,9 @@ public sealed record IsWhitespaceConditionTests
     [Fact]
     public void TakesFalseResultOnAllWhitespacesOneNot()
     {
-        IBool equality = new IsWhitespaceCondition(_whitespaceChars.Select(x => new Char(x)).Append(new Char('A')));
+        IBool equality = new IsWhitespaceCondition(
+            _whitespaceChars.Select(x => new Char(x)).Append(new Char('A'))
+        );
 
         Assert.False(equality.BoolValue);
     }
@@ -67,18 +71,22 @@ public sealed record IsWhitespaceConditionTests
     public void ThrowsExceptionOnEmptyArguments()
     {
         IBool equality = new IsWhitespaceCondition();
-        Assert.Throws<ArgumentException>(() => equality.BoolValue);
+        _ = Assert.Throws<ArgumentException>(() => equality.BoolValue);
     }
 
     [Fact]
     public void ThrowsExceptionOnGetHashCode()
     {
-        Assert.Throws<NotSupportedException>(() => new IsWhitespaceCondition(new Char('A')).GetHashCode());
+        _ = Assert.Throws<NotSupportedException>(() =>
+            new IsWhitespaceCondition(new Char('A')).GetHashCode()
+        );
     }
 
     [Fact]
     public void ThrowsExceptionOnToString()
     {
-        Assert.Throws<NotSupportedException>(() => new IsWhitespaceCondition(new Char('A')).ToString());
+        _ = Assert.Throws<NotSupportedException>(() =>
+            new IsWhitespaceCondition(new Char('A')).ToString()
+        );
     }
 }

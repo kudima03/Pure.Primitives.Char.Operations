@@ -1,15 +1,28 @@
-﻿using Pure.Primitives.Abstractions.Bool;
+using Pure.Primitives.Abstractions.Bool;
 
 namespace Pure.Primitives.Char.Operations.Tests;
 
 public sealed record IsDigitConditionTests
 {
-    private readonly IEnumerable<char> _digits = new[] { '0', '1', '2', '4', '5', '6', '7', '8', '9' };
+    private readonly IEnumerable<char> _digits =
+    [
+        '0',
+        '1',
+        '2',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+    ];
 
     [Fact]
     public void TakesPositiveResultOnDigits()
     {
-        IBool equality = new IsDigitCondition(_digits.Select(x => new Char(Convert.ToChar(x))));
+        IBool equality = new IsDigitCondition(
+            _digits.Select(x => new Char(Convert.ToChar(x)))
+        );
 
         Assert.True(equality.BoolValue);
     }
@@ -17,9 +30,9 @@ public sealed record IsDigitConditionTests
     [Fact]
     public void TakesFalseResultOnAllDigitsOneNot()
     {
-        IBool equality =
-            new IsDigitCondition(_digits.Select(x => new Char(Convert.ToChar(x)))
-                .Append(new Char('A')));
+        IBool equality = new IsDigitCondition(
+            _digits.Select(x => new Char(Convert.ToChar(x))).Append(new Char('A'))
+        );
 
         Assert.False(equality.BoolValue);
     }
@@ -43,18 +56,22 @@ public sealed record IsDigitConditionTests
     public void ThrowsExceptionOnEmptyArguments()
     {
         IBool equality = new IsDigitCondition();
-        Assert.Throws<ArgumentException>(() => equality.BoolValue);
+        _ = Assert.Throws<ArgumentException>(() => equality.BoolValue);
     }
 
     [Fact]
     public void ThrowsExceptionOnGetHashCode()
     {
-        Assert.Throws<NotSupportedException>(() => new IsDigitCondition(new Char('A')).GetHashCode());
+        _ = Assert.Throws<NotSupportedException>(() =>
+            new IsDigitCondition(new Char('A')).GetHashCode()
+        );
     }
 
     [Fact]
     public void ThrowsExceptionOnToString()
     {
-        Assert.Throws<NotSupportedException>(() => new IsDigitCondition(new Char('A')).ToString());
+        _ = Assert.Throws<NotSupportedException>(() =>
+            new IsDigitCondition(new Char('A')).ToString()
+        );
     }
 }

@@ -1,10 +1,21 @@
-﻿using Pure.Primitives.Abstractions.Bool;
+using Pure.Primitives.Abstractions.Bool;
 
 namespace Pure.Primitives.Char.Operations.Tests;
 
 public sealed record IsLetterConditionTests
 {
-    private readonly IEnumerable<char> _letterChars = new[] { 'a', 'B', 'c', 'D', 'e', 'F', 'g', 'H', 'i' };
+    private readonly IEnumerable<char> _letterChars =
+    [
+        'a',
+        'B',
+        'c',
+        'D',
+        'e',
+        'F',
+        'g',
+        'H',
+        'i',
+    ];
 
     [Fact]
     public void TakesPositiveResultOnLetters()
@@ -17,7 +28,9 @@ public sealed record IsLetterConditionTests
     [Fact]
     public void TakesFalseResultOnAllLettersOneNot()
     {
-        IBool equality = new IsLetterCondition(_letterChars.Select(x => new Char(x)).Append(new Char('.')));
+        IBool equality = new IsLetterCondition(
+            _letterChars.Select(x => new Char(x)).Append(new Char('.'))
+        );
 
         Assert.False(equality.BoolValue);
     }
@@ -33,7 +46,9 @@ public sealed record IsLetterConditionTests
     [Fact]
     public void ProduceTrueOnSingleElementInCollection()
     {
-        IBool equality = new IsLetterCondition(_letterChars.Select(x => new Char(x)).First());
+        IBool equality = new IsLetterCondition(
+            _letterChars.Select(x => new Char(x)).First()
+        );
         Assert.True(equality.BoolValue);
     }
 
@@ -41,18 +56,22 @@ public sealed record IsLetterConditionTests
     public void ThrowsExceptionOnEmptyArguments()
     {
         IBool equality = new IsLetterCondition();
-        Assert.Throws<ArgumentException>(() => equality.BoolValue);
+        _ = Assert.Throws<ArgumentException>(() => equality.BoolValue);
     }
 
     [Fact]
     public void ThrowsExceptionOnGetHashCode()
     {
-        Assert.Throws<NotSupportedException>(() => new IsLetterCondition(new Char('A')).GetHashCode());
+        _ = Assert.Throws<NotSupportedException>(() =>
+            new IsLetterCondition(new Char('A')).GetHashCode()
+        );
     }
 
     [Fact]
     public void ThrowsExceptionOnToString()
     {
-        Assert.Throws<NotSupportedException>(() => new IsLetterCondition(new Char('A')).ToString());
+        _ = Assert.Throws<NotSupportedException>(() =>
+            new IsLetterCondition(new Char('A')).ToString()
+        );
     }
 }

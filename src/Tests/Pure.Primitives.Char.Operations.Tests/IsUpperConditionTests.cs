@@ -1,4 +1,4 @@
-﻿using Pure.Primitives.Abstractions.Bool;
+using Pure.Primitives.Abstractions.Bool;
 
 namespace Pure.Primitives.Char.Operations.Tests;
 
@@ -13,7 +13,8 @@ public sealed record IsUpperConditionTests
             new Char('C'),
             new Char('D'),
             new Char('Y'),
-            new Char('H'));
+            new Char('H')
+        );
 
         Assert.True(equality.BoolValue);
     }
@@ -28,7 +29,8 @@ public sealed record IsUpperConditionTests
             new Char('D'),
             new Char('Y'),
             new Char('H'),
-            new Char('k'));
+            new Char('k')
+        );
 
         Assert.False(equality.BoolValue);
     }
@@ -52,18 +54,22 @@ public sealed record IsUpperConditionTests
     public void ThrowsExceptionOnEmptyArguments()
     {
         IBool equality = new IsUpperCondition();
-        Assert.Throws<ArgumentException>(() => equality.BoolValue);
+        _ = Assert.Throws<ArgumentException>(() => equality.BoolValue);
     }
 
     [Fact]
     public void ThrowsExceptionOnGetHashCode()
     {
-        Assert.Throws<NotSupportedException>(() => new IsUpperCondition(new Char('A')).GetHashCode());
+        _ = Assert.Throws<NotSupportedException>(() =>
+            new IsUpperCondition(new Char('A')).GetHashCode()
+        );
     }
 
     [Fact]
     public void ThrowsExceptionOnToString()
     {
-        Assert.Throws<NotSupportedException>(() => new IsUpperCondition(new Char('A')).ToString());
+        _ = Assert.Throws<NotSupportedException>(() =>
+            new IsUpperCondition(new Char('A')).ToString()
+        );
     }
 }
