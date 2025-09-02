@@ -1,11 +1,11 @@
-﻿using Pure.Primitives.Abstractions.Bool;
+using Pure.Primitives.Abstractions.Bool;
 
 namespace Pure.Primitives.Char.Operations.Tests;
 
 public sealed record IsPunctuationConditionTests
 {
-    private readonly IEnumerable<char> _punctuationChars = new[]
-    {
+    private readonly IEnumerable<char> _punctuationChars =
+    [
         '.', // period
         ',', // comma
         ';', // semicolon
@@ -17,21 +17,29 @@ public sealed record IsPunctuationConditionTests
         '-', // hyphen-minus
         '—', // em dash (U+2014)
         '–', // en dash (U+2013)
-        '(', ')', // parentheses
-        '[', ']', // square brackets
-        '{', '}', // curly braces
-        '/', '\\', // slash and backslash
+        '(',
+        ')', // parentheses
+        '[',
+        ']', // square brackets
+        '{',
+        '}', // curly braces
+        '/',
+        '\\', // slash and backslash
         '…', // ellipsis (U+2026)
         '·', // middle dot (U+00B7)
         '•', // bullet (U+2022)
-        '«', '»', // guillemets (U+00AB, U+00BB)
-        '‹', '›'  // single guillemets (U+2039, U+203A)
-    };
+        '«',
+        '»', // guillemets (U+00AB, U+00BB)
+        '‹',
+        '›', // single guillemets (U+2039, U+203A)
+    ];
 
     [Fact]
     public void TakesPositiveResultOnPunctuation()
     {
-        IBool equality = new IsPunctuationCondition(_punctuationChars.Select(x => new Char(x)));
+        IBool equality = new IsPunctuationCondition(
+            _punctuationChars.Select(x => new Char(x))
+        );
 
         Assert.True(equality.BoolValue);
     }
@@ -39,7 +47,9 @@ public sealed record IsPunctuationConditionTests
     [Fact]
     public void TakesFalseResultOnAllPunctuationOneNot()
     {
-        IBool equality = new IsPunctuationCondition(_punctuationChars.Select(x => new Char(x)).Append(new Char('X')));
+        IBool equality = new IsPunctuationCondition(
+            _punctuationChars.Select(x => new Char(x)).Append(new Char('X'))
+        );
 
         Assert.False(equality.BoolValue);
     }
@@ -55,7 +65,9 @@ public sealed record IsPunctuationConditionTests
     [Fact]
     public void ProduceTrueOnSingleElementInCollection()
     {
-        IBool equality = new IsPunctuationCondition(_punctuationChars.Select(x => new Char(x)).First());
+        IBool equality = new IsPunctuationCondition(
+            _punctuationChars.Select(x => new Char(x)).First()
+        );
         Assert.True(equality.BoolValue);
     }
 
@@ -63,18 +75,22 @@ public sealed record IsPunctuationConditionTests
     public void ThrowsExceptionOnEmptyArguments()
     {
         IBool equality = new IsPunctuationCondition();
-        Assert.Throws<ArgumentException>(() => equality.BoolValue);
+        _ = Assert.Throws<ArgumentException>(() => equality.BoolValue);
     }
 
     [Fact]
     public void ThrowsExceptionOnGetHashCode()
     {
-        Assert.Throws<NotSupportedException>(() => new IsPunctuationCondition(new Char('A')).GetHashCode());
+        _ = Assert.Throws<NotSupportedException>(() =>
+            new IsPunctuationCondition(new Char('A')).GetHashCode()
+        );
     }
 
     [Fact]
     public void ThrowsExceptionOnToString()
     {
-        Assert.Throws<NotSupportedException>(() => new IsPunctuationCondition(new Char('A')).ToString());
+        _ = Assert.Throws<NotSupportedException>(() =>
+            new IsPunctuationCondition(new Char('A')).ToString()
+        );
     }
 }

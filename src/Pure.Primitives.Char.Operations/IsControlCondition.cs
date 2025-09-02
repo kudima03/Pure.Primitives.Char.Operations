@@ -1,4 +1,4 @@
-﻿using Pure.Primitives.Abstractions.Bool;
+using Pure.Primitives.Abstractions.Bool;
 using Pure.Primitives.Abstractions.Char;
 
 namespace Pure.Primitives.Char.Operations;
@@ -12,18 +12,10 @@ public sealed record IsControlCondition : IBool
         _values = values;
     }
 
-    bool IBool.BoolValue
-    {
-        get
-        {
-            if (!_values.Any())
-            {
-                throw new ArgumentException();
-            }
-
-            return _values.All(x => char.IsControl(x.CharValue));
-        }
-    }
+    bool IBool.BoolValue =>
+        !_values.Any()
+            ? throw new ArgumentException()
+            : _values.All(x => char.IsControl(x.CharValue));
 
     public override int GetHashCode()
     {

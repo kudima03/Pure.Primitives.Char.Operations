@@ -1,5 +1,4 @@
-﻿using Pure.Primitives.Abstractions.Bool;
-using Pure.Primitives.String;
+using Pure.Primitives.Abstractions.Bool;
 
 namespace Pure.Primitives.Char.Operations.Tests;
 
@@ -13,7 +12,8 @@ public sealed record EqualConditionTests
             new Char('A'),
             new Char('A'),
             new Char('A'),
-            new Char('A'));
+            new Char('A')
+        );
 
         Assert.True(equality.BoolValue);
     }
@@ -34,7 +34,8 @@ public sealed record EqualConditionTests
             new Char('B'),
             new Char('C'),
             new Char('D'),
-            new Char('E'));
+            new Char('E')
+        );
 
         Assert.False(equality.BoolValue);
     }
@@ -47,7 +48,8 @@ public sealed record EqualConditionTests
             new Char('A'),
             new Char('A'),
             new Char('A'),
-            new Char('B'));
+            new Char('B')
+        );
 
         Assert.False(equality.BoolValue);
     }
@@ -63,18 +65,22 @@ public sealed record EqualConditionTests
     public void ThrowsExceptionOnEmptyArguments()
     {
         IBool equality = new EqualCondition();
-        Assert.Throws<ArgumentException>(() => equality.BoolValue);
+        _ = Assert.Throws<ArgumentException>(() => equality.BoolValue);
     }
 
     [Fact]
     public void ThrowsExceptionOnGetHashCode()
     {
-        Assert.Throws<NotSupportedException>(() => new EqualCondition(new Char('A')).GetHashCode());
+        _ = Assert.Throws<NotSupportedException>(() =>
+            new EqualCondition(new Char('A')).GetHashCode()
+        );
     }
 
     [Fact]
     public void ThrowsExceptionOnToString()
     {
-        Assert.Throws<NotSupportedException>(() => new EqualCondition(new Char('A')).ToString());
+        _ = Assert.Throws<NotSupportedException>(() =>
+            new EqualCondition(new Char('A')).ToString()
+        );
     }
 }

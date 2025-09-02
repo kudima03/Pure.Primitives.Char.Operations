@@ -1,4 +1,4 @@
-﻿using Pure.Primitives.Abstractions.Bool;
+using Pure.Primitives.Abstractions.Bool;
 
 namespace Pure.Primitives.Char.Operations.Tests;
 
@@ -13,7 +13,8 @@ public sealed record IsLowerConditionTests
             new Char('d'),
             new Char('f'),
             new Char('g'),
-            new Char('h'));
+            new Char('h')
+        );
 
         Assert.True(equality.BoolValue);
     }
@@ -28,7 +29,8 @@ public sealed record IsLowerConditionTests
             new Char('S'),
             new Char('f'),
             new Char('g'),
-            new Char('h'));
+            new Char('h')
+        );
 
         Assert.False(equality.BoolValue);
     }
@@ -52,18 +54,22 @@ public sealed record IsLowerConditionTests
     public void ThrowsExceptionOnEmptyArguments()
     {
         IBool equality = new IsLowerCondition();
-        Assert.Throws<ArgumentException>(() => equality.BoolValue);
+        _ = Assert.Throws<ArgumentException>(() => equality.BoolValue);
     }
 
     [Fact]
     public void ThrowsExceptionOnGetHashCode()
     {
-        Assert.Throws<NotSupportedException>(() => new IsLowerCondition(new Char('A')).GetHashCode());
+        _ = Assert.Throws<NotSupportedException>(() =>
+            new IsLowerCondition(new Char('A')).GetHashCode()
+        );
     }
 
     [Fact]
     public void ThrowsExceptionOnToString()
     {
-        Assert.Throws<NotSupportedException>(() => new IsLowerCondition(new Char('A')).ToString());
+        _ = Assert.Throws<NotSupportedException>(() =>
+            new IsLowerCondition(new Char('A')).ToString()
+        );
     }
 }
