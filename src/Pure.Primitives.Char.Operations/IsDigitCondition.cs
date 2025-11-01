@@ -12,7 +12,7 @@ public sealed record IsDigitCondition : IBool
         _values = values;
     }
 
-    bool IBool.BoolValue =>
+    public bool BoolValue =>
         !_values.Any()
             ? throw new ArgumentException()
             : _values.All(x => char.IsDigit(x.CharValue));
