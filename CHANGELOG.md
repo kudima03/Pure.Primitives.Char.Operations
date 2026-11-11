@@ -6,6 +6,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [0.5.0] — 2026-11-11
+
+### Changed
+
+- The package now multi-targets `net7.0`, `net8.0`, `net9.0`, `net10.0`, and
+  `net11.0` (previously up to `net10.0`).
+
 ## [0.4.0] — 2025-11-22
 
 ### Changed
